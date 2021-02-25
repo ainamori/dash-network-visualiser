@@ -10,7 +10,7 @@ from textwrap import dedent as d
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 TITLE = "LLDP Network Visualiser"
 
-with open('example/net.json', 'r') as f:
+with open('data/net.json', 'r') as f:
     data = json.load(f)
 
 app = dash.Dash(
@@ -202,6 +202,7 @@ def update_layout(layout):
         'name': layout,
         'animate': True
     }
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
