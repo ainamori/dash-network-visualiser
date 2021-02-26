@@ -1,12 +1,13 @@
+from __future__ import annotations
+
 import functools
+import json
 import pathlib
 import sys
 from logging import getLogger
-# from nested_lookup import nested_lookup
-import json
-from __future__ import annotations
 
 import click
+from nested_lookup import nested_lookup
 
 logger = getLogger(__name__)
 
@@ -35,59 +36,73 @@ class Runner:
             raise Exception
         return path_obj_list
 
-    def _find_node(self, node, node_list):
-        
+    def _update_node_list(self, node_list, node_name, interface):
+        id_list = nested_lookup('id', node_list)
+        if interface is None:
+            _id = node_name
+            _label = node_name
+            _parent = None
+        else:
+            _id = "_".join([node_name, interface])
+            _label = interface
+            _parent = node_name
+        if _id in id_list:
+            pass
+        else:
+            new_node = {
+                "data": {
+                    "id": _id,
+                    "label": _label,
+                    "parent": _parent,
+                },
+                "classes": "rectangle"
+            }
+            node_list.append(new_node)
+        return node_list
 
+    def _update_edge_list(self, edge_list, source_id, target_id):
+        pass
 
     def _generate_net_json(self, path_obj_list):
-        node_json_path = "/".join([self.output_dir, self.node_json])
-        edge_json_path = "/".join([self.output_dir, self.edge_json])
-
+        node_list = []
+        edge_list = []
+        node_json = "/".join([self.output_dir, self.node_json])
+        node_json_path = pathlib.Path(node_json)
+        edge_json = "/".join([self.output_dir, self.edge_json])
+        edge_json_path = pathlib.Path(edge_json)
         for path_obj in path_obj_list:
             try:
+                node_name = path_obj.stem
+                node_list = self._update_node_list(
+                    node_list=node_list,
+                    node_name=node_name,
+                    interface=None
+                )
                 with open(path_obj) as f:
                     load_data = json.load(f)
-                for source_port, target_info in load_data.items():
-
-
-
-                _target = target_list[0]
-                node_list.append(_target["hostname"])
-                _link = {
-                    "source": hostname,
-                    "target": _target["hostname"],
-                    "meta": {
-                        "interface": {
-                            "source": source_port,
-                            "target": _target["port"],
-                        },
-                    },
-                }
-                inet_henge["links"].append(_link)
-
-
+                for interface, target_info in load_data.items():
+                    source_id = "_".join([node_name, interface])
+                    _target = target_info[0]
+                    target_id = "_".join([
+                        _target.get("remote_system_name"),
+                        _target.get("remote_port_description"),
+                    ])
+                    node_list = self._update_node_list(
+                        node_list=node_list,
+                        node_name=node_name,
+                        interface=interface
+                    )
+                    edge_list = self._update_edge_list(
+                        edge_list=edge_list,
+                        source_id=source_id,
+                        target_id=target_id
+                    )
             except OSError as e:
                 logger.error(str(e))
-
-
-
-
-
-            for _node in list(set(node_list)):
-                __node = {
-                    "name": _node,
-                    "icon": "./images/switch.png",
-                }
-                inet_henge["nodes"].append(__node)
-            write_path.write_text(json.dumps(inet_henge, indent=2))
-            msg = None
-            self.write_path.write_text(json.dumps(data, indent=2))
-        except Exception as e:
-            msg = str(e)
-            logger.error(msg, exc_info=True)
+        node_json_path.write_text(json.dumps(node_list, indent=2))
+        edge_json_path.write_text(json.dumps(edge_list, indent=2))
 
     def run(self):
-        data = []
         try:
             print("Loading lldp files.")
             path_obj_list = self._glob_dir()
