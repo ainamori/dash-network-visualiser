@@ -1,18 +1,41 @@
+from __future__ import annotations
+
 import json
+import sys
+from logging import getLogger
+from textwrap import dedent as d
 
 import dash
 import dash_core_components as dcc
 import dash_cytoscape as cyto
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from textwrap import dedent as d
+
+logger = getLogger(__name__)
+
 
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 TITLE = "LLDP Network Visualiser"
 
-with open('data/net.json', 'r') as f:
-    data = json.load(f)
 
+def load_json():
+    json_data = []
+    try:
+        with open('data/node.json', 'r') as f:
+            node_data = json.load(f)
+
+        with open('data/edge.json', 'r') as f:
+            edge_data = json.load(f)
+        json_data.extend(node_data)
+        json_data.extend(edge_data)
+    except OSError as e:
+        logger.error(str(e))
+        sys.exit(1)
+    else:
+        return json_data
+
+
+data = load_json()
 app = dash.Dash(
     __name__,
     external_stylesheets=EXTERNAL_STYLESHEETS,
