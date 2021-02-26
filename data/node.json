@@ -1,6 +1,6 @@
 [
 {"data": {
-   "id": "switch000", "label": "switch000",
+   "id": "switch000", "label": "switch000", "parent": null,
    "description": "Juniper Switch", "serial": "xxxxxx", "version": "xxxxxxx"
    },
  "classes": "rectangle"},
