@@ -36,6 +36,8 @@ def load_json():
 
 
 data = load_json()
+cyto.load_extra_layouts()
+
 app = dash.Dash(
     __name__,
     external_stylesheets=EXTERNAL_STYLESHEETS,
@@ -58,13 +60,14 @@ app.layout = html.Div(className="container", children=[
         className="row",
         style={'textAlign': "center"}
     ),
-    html.Button('Reset', id='bt-reset'),
     html.Div(className='row', children=[
         cyto.Cytoscape(
             id='cytoscape',
             elements=data,
             layout={
-                'name': 'breadthfirst',
+                'name': 'cola',
+                'directed': True,
+                'padding': 10
             },
             style={
                 'height': '750px',
@@ -86,13 +89,23 @@ app.layout = html.Div(className="container", children=[
             ],
         )
     ]),
+    html.Button('Reset', id='bt-reset'),
     dcc.Dropdown(
         id='dropdown-callbacks-1',
         value='grid',
         clearable=False,
         options=[
             {'label': name.capitalize(), 'value': name}
-            for name in ['grid', 'random', 'circle', 'cose', 'concentric', 'breadthfirst']
+            for name in [
+                'grid',
+                'breadthfirst',
+                'cose-bilkent',
+                'cola',
+                'euler',
+                'spread',
+                'dagre',
+                'klay',
+            ]
         ]
     ),
     html.Div(className='row', children=[

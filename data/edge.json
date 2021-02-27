@@ -1,5 +1,7 @@
 [
-{"data": {"source": "switch000_ge-0/0/46.0", "target": "router000_ge-0/0/0.0", "speed": 1000, "duplex": "auto"}},
+{"data": {
+  "source": "switch000_ge-0/0/46.0",
+  "target": "router000_ge-0/0/0.0", "speed": 1000, "duplex": "auto"}},
 
 {"data": {"source": "switch000_ge-0/0/47.0", "target": "router001_ge-0/0/0.0", "speed": 1000, "duplex": "auto"}}
 ]
