@@ -1,15 +1,533 @@
 [
-{"data": {
-   "id": "switch000", "label": "switch000", "parent": null,
-   "description": "Juniper Switch", "serial": "xxxxxx", "version": "xxxxxxx"
-   },
- "classes": "rectangle"},
-{"data": {"id": "switch000_ge-0/0/46.0", "label": "ge-0/0/46.0", "parent": "switch000"}, "classes": "rectangle"},
-{"data": {"id": "switch000_ge-0/0/47.0", "label": "ge-0/0/47.0", "parent": "switch000"}, "classes": "rectangle"},
-
-{"data": {"id": "router000", "label": "router000"}, "classes": "rectangle"},
-{"data": {"id": "router000_ge-0/0/0.0", "label": "ge-0/0/0.0", "parent": "router000"}, "classes": "rectangle"},
-
-{"data": {"id": "router001", "label": "router001"}, "classes": "rectangle"},
-{"data": {"id": "router001_ge-0/0/0.0", "label": "ge-0/0/0.0", "parent": "router001"}, "classes": "rectangle"}
+  {
+    "data": {
+      "id": "sw006",
+      "label": "sw006",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw006_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw006"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001",
+      "label": "gw001",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/6.0",
+      "label": "ge-0/0/6.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw006_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw006"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000",
+      "label": "gw000",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/6.0",
+      "label": "ge-0/0/6.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw004",
+      "label": "sw004",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw004_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw004"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/4.0",
+      "label": "ge-0/0/4.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw004_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw004"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/4.0",
+      "label": "ge-0/0/4.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw002",
+      "label": "sw002",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw002_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw002"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/2.0",
+      "label": "ge-0/0/2.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw002_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw002"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/2.0",
+      "label": "ge-0/0/2.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw009",
+      "label": "sw009",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw009_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw009"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw002",
+      "label": "gw002",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw002_ge-0/0/2.0",
+      "label": "ge-0/0/2.0",
+      "parent": "gw002"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw009_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw009"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw003",
+      "label": "gw003",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw003_ge-0/0/2.0",
+      "label": "ge-0/0/2.0",
+      "parent": "gw003"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw008",
+      "label": "sw008",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw008_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw008"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw002_ge-0/0/1.0",
+      "label": "ge-0/0/1.0",
+      "parent": "gw002"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw008_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw008"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw003_ge-0/0/1.0",
+      "label": "ge-0/0/1.0",
+      "parent": "gw003"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw001",
+      "label": "sw001",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw001_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/1.0",
+      "label": "ge-0/0/1.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw001_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/1.0",
+      "label": "ge-0/0/1.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw003",
+      "label": "sw003",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw003_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw003"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/3.0",
+      "label": "ge-0/0/3.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw003_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw003"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/3.0",
+      "label": "ge-0/0/3.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw005",
+      "label": "sw005",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw005_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw005"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/5.0",
+      "label": "ge-0/0/5.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw005_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw005"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/5.0",
+      "label": "ge-0/0/5.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw000",
+      "label": "sw000",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw000_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/0.0",
+      "label": "ge-0/0/0.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw000_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/0.0",
+      "label": "ge-0/0/0.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw010",
+      "label": "sw010",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw010_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw010"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw001_ge-0/0/7.0",
+      "label": "ge-0/0/7.0",
+      "parent": "gw001"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw010_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw010"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw000_ge-0/0/7.0",
+      "label": "ge-0/0/7.0",
+      "parent": "gw000"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw007",
+      "label": "sw007",
+      "parent": null
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw007_ge-0/0/46.0",
+      "label": "ge-0/0/46.0",
+      "parent": "sw007"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw002_ge-0/0/0.0",
+      "label": "ge-0/0/0.0",
+      "parent": "gw002"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "sw007_ge-0/0/47.0",
+      "label": "ge-0/0/47.0",
+      "parent": "sw007"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  },
+  {
+    "data": {
+      "id": "gw003_ge-0/0/0.0",
+      "label": "ge-0/0/0.0",
+      "parent": "gw003"
+    },
+    "classes": "rectangle",
+    "group": "nodes"
+  }
 ]

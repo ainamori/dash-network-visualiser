@@ -1,3 +1,4 @@
 click
 dash
+dash-bootstrap-components
 gunicorn

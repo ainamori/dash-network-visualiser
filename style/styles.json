@@ -1,0 +1,14 @@
+{
+    "title": {
+        "textAlign": "center",
+        "background-color": "lightblue"
+    },
+    "json-output": {
+        "overflow-y": "scroll",
+        "height": "calc(25% - 25px)",
+        "border": "thin lightgrey solid"
+    },
+    "tab": {
+        "background-color": "lightgreen"
+    }
+}
