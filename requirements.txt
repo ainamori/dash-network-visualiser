@@ -1,4 +1,5 @@
 click
 dash
 dash-bootstrap-components
+dash-cytoscape
 gunicorn

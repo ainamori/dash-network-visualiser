@@ -1,0 +1,28 @@
+version: "3"
+services:
+  dash-network-visualiser:
+    restart: always
+    container_name: 'dash-network-visualiser'
+    hostname: dash-network-visualiser
+    image: ghcr.io/ainamori/dash-network-visualiser/dash-network-visualiser:latest
+    environment:
+      TZ: Asia/Tokyo
+    # networks:
+    #   - network
+    ports:
+      - 8000:8000
+    logging:
+      driver: "json-file" # defaults if not specified
+      options:
+        max-size: "1m"
+        max-file: "30"
+    working_dir: /opt
+    command: ["gunicorn", "app:server", "-b :8000"]
+    tty: true
+    volumes:
+      - ./data:/opt/data
+
+networks:
+  network:
+    external: true
+
