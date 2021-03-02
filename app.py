@@ -11,15 +11,21 @@ import dash_core_components as dcc
 import dash_cytoscape as cyto
 import dash_html_components as html
 from dash.dependencies import Input, Output
+from modules.load_data import LoadingData
+from modules.data_type import LOAD_DATA, STYLES
 
 logger = getLogger(__name__)
 
 
-# EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-EXTERNAL_STYLESHEETS = [dbc.themes.BOOTSTRAP]
+EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+BOOTSTRAP_STYLESHEETS = [dbc.themes.BOOTSTRAP]
 TITLE = "LLDP Network Visualiser"
-data = []
 
+loadingdata = LoadingData()
+styles: STYLES = loadingdata.loading_styles()
+data: LOAD_DATA = loadingdata.loading_data()
+
+"""
 print("Loading node data.")
 with open('data/node.json', 'r') as f:
     node_data = json.load(f)
@@ -33,14 +39,14 @@ with open('data/edge.json', 'r') as f:
 print("Loading style settings.")
 with open('style/styles.json', 'r') as f:
     styles = json.load(f)
+"""
 
 cyto.load_extra_layouts()
 app = dash.Dash(
     __name__,
-    external_stylesheets=EXTERNAL_STYLESHEETS,
+    external_stylesheets=BOOTSTRAP_STYLESHEETS,
     title=TITLE,
 )
-server = app.server
 
 tab_tapnode_content = dbc.Card(
     dbc.CardBody(
@@ -78,7 +84,42 @@ tab_mouseover_content = dbc.Card(
     className="mt-3",
 )
 
-# app.layout = html.Div(className="container", children=[
+tab_tap_object = dbc.Card(
+    dbc.CardBody(
+        [
+            html.P('Node Object JSON:'),
+            html.Pre(
+                id='tap-node-json-output',
+                style=styles['json-output']
+            ),
+            html.P('Edge Object JSON:'),
+            html.Pre(
+                id='tap-edge-json-output',
+                style=styles['json-output']
+            )
+        ]
+    ),
+    className="mt-3",
+)
+
+tab_selected_data = dbc.Card(
+    dbc.CardBody(
+        [
+            html.P('Node Data JSON:'),
+            html.Pre(
+                id='selected-node-data-json-output',
+                style=styles['json-output']
+            ),
+            html.P('Edge Data JSON:'),
+            html.Pre(
+                id='selected-edge-data-json-output',
+                style=styles['json-output']
+            )
+        ]
+    ),
+    className="mt-3",
+)
+
 app.layout = dbc.Container([
     dbc.Row(
         [
@@ -145,6 +186,8 @@ app.layout = dbc.Container([
                     [
                         dbc.Tab(tab_tapnode_content, label="Tap Data"),
                         dbc.Tab(tab_mouseover_content, label="Mouseover Data"),
+                        dbc.Tab(tab_tap_object, label="Tap Object Data"),
+                        dbc.Tab(tab_selected_data, label="Selected Data"),
                     ],
                     id="tabs",
                 ),
@@ -157,38 +200,6 @@ app.layout = dbc.Container([
     ),
 ], style={"background-color": "white"},
 )
-
-"""
-                    dcc.Tab(label='Tap Objects', children=[
-                        html.Div(style=styles['tab'], children=[
-                            html.P('Node Object JSON:'),
-                            html.Pre(
-                                id='tap-node-json-output',
-                                style=styles['json-output']
-                            ),
-                            html.P('Edge Object JSON:'),
-                            html.Pre(
-                                id='tap-edge-json-output',
-                                style=styles['json-output']
-                            )
-                        ])
-                    ]),
-                    dcc.Tab(label='Selected Data', children=[
-                        html.Div(style=styles['tab'], children=[
-                            html.P('Node Data JSON:'),
-                            html.Pre(
-                                id='selected-node-data-json-output',
-                                style=styles['json-output']
-                            ),
-                            html.P('Edge Data JSON:'),
-                            html.Pre(
-                                id='selected-edge-data-json-output',
-                                style=styles['json-output']
-                            )
-                        ])
-                    ])
-
-"""
 
 
 @ app.callback(Output('tap-node-json-output', 'children'),
@@ -257,6 +268,8 @@ def update_layout(layout):
         'animate': True
     }
 
+
+server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
