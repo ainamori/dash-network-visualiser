@@ -12,7 +12,7 @@ logger = getLogger(__name__)
 class LoadingData:
 
     def __init__(self) -> None:
-        self.data_dir: str = "data"
+        self.data_dir: str = "data/json_data"
         self.node_json: str = f"{self.data_dir}/node.json"
         self.edge_json: str = f"{self.data_dir}/edge.json"
         self.styles_json: str = "style/styles.json"
@@ -45,11 +45,11 @@ class LoadingData:
         self.load_data = []
         try:
             print("Loading node data.")
-            with open('data/node.json', 'r') as f:
+            with open(self.node_json, 'r') as f:
                 node_data = json.load(f)
 
             print("Loading edge data.")
-            with open('data/edge.json', 'r') as f:
+            with open(self.edge_json, 'r') as f:
                 edge_data = json.load(f)
 
             self.load_data.extend(node_data)

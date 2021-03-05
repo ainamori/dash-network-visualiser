@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Optional, Union, Dict, List, Any
+from typing import Union, Dict, List, Any
 
 PATH_OBJ = pathlib.Path
 PATH_OBJ_LIST = List[PATH_OBJ]

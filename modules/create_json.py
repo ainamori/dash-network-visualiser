@@ -1,24 +1,14 @@
 from __future__ import annotations
 
-import functools
 import json
 import pathlib
 import sys
 from logging import getLogger
-
-import click
-from typing import Optional, Union, Dict, List
+from typing import Union, Dict, List
+from modules.data_type import PATH_OBJ, PATH_OBJ_LIST
+from modules.data_type import DATA, NODE_LIST, NODE, EDGE_LIST, EDGE
 
 logger = getLogger(__name__)
-
-PATH_OBJ = pathlib.Path
-PATH_OBJ_LIST = List[PATH_OBJ]
-
-DATA = Dict[str, str]
-NODE = Dict[str, Union[str, DATA]]
-NODE_LIST = List[NODE]
-EDGE = Dict[str, DATA]
-EDGE_LIST = List[EDGE]
 
 
 class Runner:
@@ -159,31 +149,3 @@ class Runner:
             sys.exit(1)
         else:
             print("Generating json files successfuly.")
-
-
-def common_options(func):
-    @ click.option('-i', '--input_dir', required=True, type=str,
-                   default='./',
-                   help="glob target file dir.(default: ./data)")
-    @ click.option('-o', '--output_dir', required=True, type=str,
-                   default='./',
-                   help="output dir.(default: ./)")
-    @ functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        return func(*args, **kwargs)
-    return wrapper
-
-
-@ click.command()
-@ common_options
-def cli(input_dir, output_dir):
-    app = Runner(input_dir, output_dir)
-    app.run()
-
-
-def main():
-    cli()
-
-
-if __name__ == "__main__":
-    main()
