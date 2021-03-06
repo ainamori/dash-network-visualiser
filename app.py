@@ -25,22 +25,6 @@ loadingdata = LoadingData()
 styles: STYLES = loadingdata.loading_styles()
 data: LOAD_DATA = loadingdata.loading_data()
 
-"""
-print("Loading node data.")
-with open('data/node.json', 'r') as f:
-    node_data = json.load(f)
-    data.extend(node_data)
-
-print("Loading edge data.")
-with open('data/edge.json', 'r') as f:
-    edge_data = json.load(f)
-    data.extend(edge_data)
-
-print("Loading style settings.")
-with open('style/styles.json', 'r') as f:
-    styles = json.load(f)
-"""
-
 cyto.load_extra_layouts()
 app = dash.Dash(
     __name__,

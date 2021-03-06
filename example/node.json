@@ -1,6 +1,6 @@
 [
 {"data": {
-   "id": "switch000", "label": "switch000",
+   "id": "switch000", "label": "switch000", "parent": null,
    "description": "Juniper Switch", "serial": "xxxxxx", "version": "xxxxxxx"
    },
  "classes": "rectangle"},
@@ -11,9 +11,5 @@
 {"data": {"id": "router000_ge-0/0/0.0", "label": "ge-0/0/0.0", "parent": "router000"}, "classes": "rectangle"},
 
 {"data": {"id": "router001", "label": "router001"}, "classes": "rectangle"},
-{"data": {"id": "router001_ge-0/0/0.0", "label": "ge-0/0/0.0", "parent": "router001"}, "classes": "rectangle"},
-
-{"data": {"source": "switch000_ge-0/0/46.0", "target": "router000_ge-0/0/0.0", "value": 1}},
-
-{"data": {"source": "switch000_ge-0/0/47.0", "target": "router001_ge-0/0/0.0", "value": 1}}
+{"data": {"id": "router001_ge-0/0/0.0", "label": "ge-0/0/0.0", "parent": "router001"}, "classes": "rectangle"}
 ]

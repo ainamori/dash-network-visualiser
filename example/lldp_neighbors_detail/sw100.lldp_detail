@@ -1,0 +1,36 @@
+{
+  "ge-0/0/47.0": [
+    {
+      "parent_interface": "-",
+      "remote_port": "503",
+      "remote_chassis_id": "11:22:33:44:55:66",
+      "remote_port_description": "ge-0/0/0.0",
+      "remote_system_name": "gw101",
+      "remote_system_description": "Juniper Networks, Inc. ex4200-48t , version 11.4R8.5 Build date: 2013-05-28 22:55:29 UTC",
+      "remote_system_capab": [
+        "bridge",
+        "router"
+      ],
+      "remote_system_enable_capab": [
+        "router"
+      ]
+    }
+  ],
+  "ge-0/0/46.0": [
+    {
+      "parent_interface": "-",
+      "remote_port": "503",
+      "remote_chassis_id": "AA:BB:CC:DD:EE:FF",
+      "remote_port_description": "ge-0/0/0.0",
+      "remote_system_name": "gw100",
+      "remote_system_description": "Juniper Networks, Inc. ex4200-48t , version 11.4R8.5 Build date: 2013-05-28 22:55:29 UTC",
+      "remote_system_capab": [
+        "bridge",
+        "router"
+      ],
+      "remote_system_enable_capab": [
+        "router"
+      ]
+    }
+  ]
+}
