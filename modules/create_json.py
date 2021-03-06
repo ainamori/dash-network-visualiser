@@ -1,22 +1,28 @@
 from __future__ import annotations
 
+import os
 import json
 import pathlib
 import sys
 from logging import getLogger
-from typing import Union, Dict, List
+from typing import Optional, Union, Dict, List
 from modules.data_type import PATH_OBJ, PATH_OBJ_LIST
-from modules.data_type import DATA, NODE_LIST, NODE, EDGE_LIST, EDGE
+from modules.data_type import LOAD_DATA, DATA, NODE_LIST, NODE, EDGE_LIST, EDGE
 
 logger = getLogger(__name__)
 
 
-class Runner:
+class CreateJson:
 
-    def __init__(self, input_dir: str, output_dir: str) -> None:
+    def __init__(self, input_dir: str) -> None:
         self.input_dir: PATH_OBJ = pathlib.Path(input_dir)
-        self.node_json: str = f"{output_dir}/node.json"
-        self.edge_json: str = f"{output_dir}/edge.json"
+        self.data_dir_list: List[str] = [
+            "lldp_neighbors",
+            "lldp_neighbors_detail",
+            "interface",
+            "chassis",
+            "config",
+        ]
         self.node_list: NODE_LIST = []
         self.edge_list: EDGE_LIST = []
         self.id_list: List[str] = []
@@ -25,13 +31,17 @@ class Runner:
 
     def _glob_dir(self, regex: str = None) -> PATH_OBJ_LIST:
         """指定ディレクトリからファイル一覧を取得する."""
+        path_obj_list: Optional[PATH_OBJ_LIST] = []
         if regex is None:
             _glob_regex = "[!.]*"
         else:
             _glob_regex = regex
         try:
-            obj = self.input_dir.glob(_glob_regex)
-            path_obj_list = list(p for p in obj if p.is_file())
+            for dir_name in self.data_dir_list:
+                dir_path = os.path.join(*[self.input_dir, dir_name])
+                obj = pathlib.Path(dir_path).glob(_glob_regex)
+                _path_obj_list = list(p for p in obj if p.is_file())
+                path_obj_list.extend(_path_obj_list)
         except OSError as e:
             msg = "Cannot load file: %s" % str(e)
             logger.error(msg, exc_info=True)
@@ -83,17 +93,15 @@ class Runner:
             self.source_list.append(source_id)
             self.target_list.append(target_id)
 
-    def _generate_net_json(self, lldp_file_list: PATH_OBJ_LIST) -> None:
-        p_node_json: PATH_OBJ = pathlib.Path(self.node_json)
-        p_edge_json: PATH_OBJ = pathlib.Path(self.edge_json)
+    def _generate_data(self, file_list: PATH_OBJ_LIST) -> None:
 
-        for lldp_file in lldp_file_list:
-            print(f"Loading {lldp_file}")
+        for _file in file_list:
+            print(f"Loading {_file}")
             try:
-                with open(lldp_file) as f:
+                with open(_file) as f:
                     load_data = json.load(f)
 
-                source_name = lldp_file.stem
+                source_name = _file.stem
                 for source_interface, target_info in load_data.items():
                     source_id = f"{source_name}_{source_interface}"
 
@@ -134,18 +142,38 @@ class Runner:
                 logger.error(str(e))
             except IndexError as e:
                 logger.error(str(e))
-        p_node_json.write_text(json.dumps(self.node_list, indent=2))
-        p_edge_json.write_text(json.dumps(self.edge_list, indent=2))
 
     def run(self) -> None:
-        try:
-            print("Loading lldp files.")
-            lldp_file_list: PATH_OBJ_LIST = self._glob_dir()
+        print("Loading data files.")
+        file_list: PATH_OBJ_LIST = self._glob_dir()
+        self._generate_data(file_list)
 
-            print("Generating json files.")
-            self._generate_net_json(lldp_file_list)
+    def json_dumper(self, output_dir: str) -> int:
+        response_code: int = 1
+        try:
+            self.run()
+            node_file: str = os.path.join(*[output_dir, "node.json"])
+            edge_file: str = os.path.join(*[output_dir, "edge.json"])
+            pathlib.Path(node_file).write_text(json.dumps(self.node_list, indent=2))
+            pathlib.Path(edge_file).write_text(json.dumps(self.edge_list, indent=2))
+            print("Generating json files successfuly.")
+        except OSError as e:
+            logger.error(str(e))
+        except Exception as e:
+            logger.error(str(e), exc_info=True)
+        else:
+            response_code = 0
+        finally:
+            return response_code
+
+    def data_dumper(self):
+        load_data = []
+        try:
+            self.run()
+            load_data.extend(self.node_list)
+            load_data.extend(self.edge_list)
         except Exception as e:
             logger.error(str(e), exc_info=True)
             sys.exit(1)
         else:
-            print("Generating json files successfuly.")
+            return load_data
